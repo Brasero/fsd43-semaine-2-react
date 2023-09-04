@@ -6,12 +6,13 @@ import './App.css'
 import Form from './component/Form';
 import UserList from './component/UserList';
 import Home from './page/Home'
+import Panier from './component/Panier'
 
 function App() {
 
   return (
     <>
-        <Form />
+        <Panier />
     </>
   )
 }

@@ -1,20 +1,45 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useReducer} from 'react';
 
-import UserList from '../UserList'
+import UserList from '../UserList';
+
+
+const formReducer = (state, action) => {
+    switch(action.type) {
+
+        case 'changeValue':
+            return {
+                ...state,
+                [action.payload.name]: action.payload.value
+            }
+
+        case 'RESET':
+            return init(initialState)
+
+        default:
+            return state;
+    }
+}
+
+const init = (state) => {
+    return {
+        ...state,
+        inputValue: 'votre nom',
+        error: ''
+    }
+}
+const initialState = {
+     inputValue: '',
+     error: '',
+     select: [2,3],
+     list: [],
+     input2: ''
+ }
+
 
 const Form = () => {
 
-    const [state, setState] = useState({
-        inputValue: '',
-        error: '',
-        select: [2,3],
-        list: [],
-        input2: ''
-    })
 
-    useEffect(() => {
-        console.log(state)
-    }, [state])
+    const [reducerState, dispatch] = useReducer(formReducer, initialState, init)
 
     const validate = (value) => {
         if (value === '') {
@@ -40,38 +65,48 @@ const Form = () => {
             return;
         }
 
-        setState({
-            ...state,
-            [name]: value
+        dispatch({
+            type: 'changeValue',
+            payload: {
+                name,
+               value
+            }
         })
 
         if (e.target.value.length > 0) {
-            setState((prev) => {
-                return {
-                    ...prev,
-                    error: ''
-               }
+            dispatch({
+                type: 'changeValue',
+                payload: {
+                    name: "error",
+                    value: ''
+                }
             })
         }
     }
 
     const handleSelectChange = (value) => {
 
-        const copy = [...state.select]
+        const copy = [...reducerState.select]
 
         const index = copy.findIndex((num) => num === value)
 
         if (index === -1) {
             copy.push(value)
-            setState({
-                ...state,
-                select: copy
+            dispatch({
+                type: 'changeValue',
+                payload: {
+                    name: 'select',
+                    value: copy
+                }
             })
         } else {
             const newSelect = copy.filter((num) => num !== value)
-            setState({
-                ...state,
-                select: newSelect
+            dispatch({
+                type: 'changeValue',
+                payload: {
+                    name: 'select',
+                    value: newSelect
+                }
             })
         }
     }
@@ -79,20 +114,32 @@ const Form = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const errored = validate(state.inputValue)
+        const errored = validate(reducerState.inputValue)
 
         if (errored === true) {
-            const copy = [...state.list];
-            copy.push(state.inputValue)
-            setState({
-                ...state,
-                list: copy,
-                inputValue: ''
+            const copy = [...reducerState.list];
+            copy.push(reducerState.inputValue)
+            dispatch({
+                type: 'changeValue',
+                payload: {
+                    name: 'list',
+                    value: copy
+                }
+            })
+            dispatch({
+                type: 'changeValue',
+                payload: {
+                    name: 'inputValue',
+                    value: ''
+                }
             })
         } else {
-            setState({
-                ...state,
-                error: errored
+            dispatch({
+                type: 'changeValue',
+                payload: {
+                    name: 'error',
+                    value: errored
+                }
             })
         }
     }
@@ -104,7 +151,7 @@ const Form = () => {
                 <input
                     type='text'
                     name="inputValue"
-                    value={state.inputValue}
+                    value={reducerState.inputValue}
                     onChange={handleChange}
                 />
             </label>
@@ -113,7 +160,7 @@ const Form = () => {
                 <input
                     type='text'
                     name="input2"
-                    value={state.input2}
+                    value={reducerState.input2}
                     onChange={handleChange}
                 />
             </label>
@@ -122,16 +169,18 @@ const Form = () => {
             type='submit'
             value='Add'
            />
-           <select name='select' value={state.select} multiple={true} onChange={handleChange}>
+           <select name='select' value={reducerState.select} multiple={true} onChange={handleChange}>
             <option value={1}> option1 </option>
             <option value={2}> option2 </option>
             <option value={3}> option3 </option>
             <option value={4}> option4 </option>
            </select>
 
-           <div>{state.error && state.error}</div>
+           <div>{reducerState.error && reducerState.error}</div>
 
-           <UserList list={state.list} />
+           <div onClick={() => dispatch({type: 'RESET'})}>RESET</div>
+
+           <UserList list={reducerState.list} />
         </form>
     )
 
