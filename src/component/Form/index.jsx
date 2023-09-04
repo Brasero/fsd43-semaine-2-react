@@ -3,26 +3,18 @@ import React, {useState, useEffect} from 'react';
 import UserList from '../UserList'
 
 const Form = () => {
-    const [value, setValue] = useState('')
-    const [error, setError] = useState('')
 
-    //Valeur et setter du textarea
-    const [text, setText] = useState('test')
-
-
-    //Valeur par default du select
-    const [select, setSelect] = useState([3, 2])
-
-
-    const [list, setList] = useState([
-        'Pierre',
-        'Paul',
-        'Jacques'
-    ])
+    const [state, setState] = useState({
+        inputValue: '',
+        error: '',
+        select: [2,3],
+        list: [],
+        input2: ''
+    })
 
     useEffect(() => {
-        console.log(select)
-    }, [select])
+        console.log(state)
+    }, [state])
 
     const validate = (value) => {
         if (value === '') {
@@ -40,46 +32,68 @@ const Form = () => {
 
 
     const handleChange = (e) => {
-        console.log(e.target.value)
-        setValue(e.target.value)
+        const {value, name} = e.target;
+
+        if (name === 'select') {
+            handleSelectChange(parseInt(value))
+            console.log('select')
+            return;
+        }
+
+        setState({
+            ...state,
+            [name]: value
+        })
+
         if (e.target.value.length > 0) {
-            setError('')
+            setState((prev) => {
+                return {
+                    ...prev,
+                    error: ''
+               }
+            })
         }
     }
 
-    const handleSelectChange = (e) => {
-        const {value} = e.target
-        const copy = [...select]
+    const handleSelectChange = (value) => {
+
+        const copy = [...state.select]
 
         const index = copy.findIndex((num) => num === value)
-        console.log(index)
 
         if (index === -1) {
             copy.push(value)
-            setSelect(copy)
+            setState({
+                ...state,
+                select: copy
+            })
         } else {
-            setSelect(copy.filter((num) => num !== value))
+            const newSelect = copy.filter((num) => num !== value)
+            setState({
+                ...state,
+                select: newSelect
+            })
         }
-    }
-
-
-    // Fonction de modification du textarea
-    const handleTextChange = (e) => {
-        setText(e.target.value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(value)
 
-        const errored = validate(value)
+        const errored = validate(state.inputValue)
 
         if (errored === true) {
-            const copy = [...list];
-            copy.push(value)
-            setList(copy)
+            const copy = [...state.list];
+            copy.push(state.inputValue)
+            setState({
+                ...state,
+                list: copy,
+                inputValue: ''
+            })
         } else {
-            setError(errored)
+            setState({
+                ...state,
+                error: errored
+            })
         }
     }
 
@@ -89,24 +103,35 @@ const Form = () => {
                 Username :
                 <input
                     type='text'
-                    value={value}
+                    name="inputValue"
+                    value={state.inputValue}
                     onChange={handleChange}
                 />
             </label>
+            <label>
+                input 2 :
+                <input
+                    type='text'
+                    name="input2"
+                    value={state.input2}
+                    onChange={handleChange}
+                />
+            </label>
+
            <input
             type='submit'
             value='Add'
            />
-           <select value={select} multiple={true} onChange={handleSelectChange}>
+           <select name='select' value={state.select} multiple={true} onChange={handleChange}>
             <option value={1}> option1 </option>
             <option value={2}> option2 </option>
             <option value={3}> option3 </option>
             <option value={4}> option4 </option>
            </select>
 
-           <div>{error && error}</div>
+           <div>{state.error && state.error}</div>
 
-           <UserList list={list} />
+           <UserList list={state.list} />
         </form>
     )
 
