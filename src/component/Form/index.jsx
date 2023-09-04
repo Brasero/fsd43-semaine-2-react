@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import UserList from '../UserList'
 
@@ -8,11 +8,21 @@ const Form = () => {
 
     //Valeur et setter du textarea
     const [text, setText] = useState('test')
+
+
+    //Valeur par default du select
+    const [select, setSelect] = useState([3, 2])
+
+
     const [list, setList] = useState([
         'Pierre',
         'Paul',
         'Jacques'
     ])
+
+    useEffect(() => {
+        console.log(select)
+    }, [select])
 
     const validate = (value) => {
         if (value === '') {
@@ -36,6 +46,22 @@ const Form = () => {
             setError('')
         }
     }
+
+    const handleSelectChange = (e) => {
+        const {value} = e.target
+        const copy = [...select]
+
+        const index = copy.findIndex((num) => num === value)
+        console.log(index)
+
+        if (index === -1) {
+            copy.push(value)
+            setSelect(copy)
+        } else {
+            setSelect(copy.filter((num) => num !== value))
+        }
+    }
+
 
     // Fonction de modification du textarea
     const handleTextChange = (e) => {
@@ -71,10 +97,12 @@ const Form = () => {
             type='submit'
             value='Add'
            />
-           {
-            //TextArea controlé en React
-           }
-           <textarea value={text} onChange={handleTextChange} />
+           <select value={select} multiple={true} onChange={handleSelectChange}>
+            <option value={1}> option1 </option>
+            <option value={2}> option2 </option>
+            <option value={3}> option3 </option>
+            <option value={4}> option4 </option>
+           </select>
 
            <div>{error && error}</div>
 
