@@ -6,12 +6,13 @@ import './App.css'
 import Form from './component/Form';
 import UserList from './component/UserList';
 import Home from './page/Home'
+import BaseSelect from './component/BaseSelect'
 
 function App() {
 
   return (
     <>
-        <Form />
+        <BaseSelect />
     </>
   )
 }
