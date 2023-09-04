@@ -5,6 +5,9 @@ import UserList from '../UserList'
 const Form = () => {
     const [value, setValue] = useState('')
     const [error, setError] = useState('')
+
+    //Valeur et setter du textarea
+    const [text, setText] = useState('test')
     const [list, setList] = useState([
         'Pierre',
         'Paul',
@@ -32,6 +35,11 @@ const Form = () => {
         if (e.target.value.length > 0) {
             setError('')
         }
+    }
+
+    // Fonction de modification du textarea
+    const handleTextChange = (e) => {
+        setText(e.target.value)
     }
 
     const handleSubmit = (e) => {
@@ -63,6 +71,11 @@ const Form = () => {
             type='submit'
             value='Add'
            />
+           {
+            //TextArea controlé en React
+           }
+           <textarea value={text} onChange={handleTextChange} />
+
            <div>{error && error}</div>
 
            <UserList list={list} />
