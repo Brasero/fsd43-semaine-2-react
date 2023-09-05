@@ -1,11 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './itemList.scss'
 
 import {NavLink} from "react-router-dom";
+import {usePanier} from "../../utils/hook/usePanier.jsx";
 
 
 
-const ItemList = ({onAdd, elements}) => {
+const ItemList = ({elements}) => {
+
+    const {addToCart} = usePanier()
+
     return (
         <div className='container'>
             <div className='itemList'>
@@ -31,7 +35,7 @@ const ItemList = ({onAdd, elements}) => {
                                         <button
                                             className={'item_buttons_button'}
                                             role={'button'}
-                                            onClick={() => onAdd(element)}
+                                            onClick={() => addToCart(element)}
                                         >
                                             Ajouter au panier +
                                         </button>

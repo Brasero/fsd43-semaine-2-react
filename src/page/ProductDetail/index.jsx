@@ -1,8 +1,9 @@
 import {useParams, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import './productDetail.scss'
+import {usePanier} from "../../utils/hook/usePanier.jsx";
 
-const ProductDetail = ({addToCart}) => {
-
+const ProductDetail = () => {
+    const {addToCart} = usePanier()
     const {name} = useParams()
     const params = useSearchParams()
     console.log(params)
