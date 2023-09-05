@@ -1,10 +1,12 @@
 import React, {useReducer} from 'react'
+import {useLocation, useOutletContext} from "react-router-dom";
 
 import ItemList from '../ItemList'
 
 const initialState = []
 
 const panierReducer = (state, action) => {
+
 
     switch(action.type) {
         case 'addItem':
@@ -44,6 +46,15 @@ const panierReducer = (state, action) => {
 }
 
 const Panier = () => {
+
+
+    const context = useOutletContext()
+
+    const routeState = useLocation()
+
+    console.log(routeState)
+
+    console.log(context)
 
     const [panier, dispatch] = useReducer(panierReducer, initialState)
 

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Panier from '../Panier'
+import {NavLink} from "react-router-dom";
 
 
 const elements = [
@@ -21,7 +22,12 @@ const ItemList = ({onAdd}) => {
                <ul>
                 {
                     elements.map((element, index) => {
-                        return <li key={index} onClick={() => onAdd(element)}>{element.name} - {element.prix} €</li>
+                        return (
+                            <div>
+                                <li key={index} onClick={() => onAdd(element)}>{element.name} - {element.prix} €</li>
+                                <NavLink to={'/detailProduct'} state={element}> > </NavLink>
+                            </div>
+                        )
                     })
                 }
                </ul>
