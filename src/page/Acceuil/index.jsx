@@ -5,7 +5,7 @@ import products from "../../Data/product.js";
 import CategoryFilter from "../../component/CategoryFilter/index.jsx";
 import {useState} from "react";
 
-const Acceuil = () => {
+const Acceuil = ({addToCart}) => {
 
     const [categoryFilter, setCategoryFilter] = useState(null)
 
@@ -28,7 +28,7 @@ const Acceuil = () => {
     return (
         <div className={'container'}>
             <CategoryFilter elements={products} filter={categoryFilter} handleChange={handleFilterChange} />
-            <ItemList elements={filteredProducts()}/>
+            <ItemList onAdd={addToCart} elements={filteredProducts()}/>
         </div>
     )
 }

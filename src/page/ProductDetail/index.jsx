@@ -1,7 +1,7 @@
 import {useParams, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import './productDetail.scss'
 
-const ProductDetail = () => {
+const ProductDetail = ({addToCart}) => {
 
     const {name} = useParams()
     const params = useSearchParams()
@@ -47,12 +47,7 @@ const ProductDetail = () => {
                     </span>
             </div>
             <div className={'detail_info'}>
-                    <span className={'label'}>
-
-                    </span>
-                <span className={'data'}>
-
-                    </span>
+                <button onClick={() => addToCart(state)} >Ajouter au panier</button>
             </div>
         </div>
 
