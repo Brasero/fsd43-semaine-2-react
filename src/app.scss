@@ -1,0 +1,19 @@
+.app_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 1rem;
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.app_header {
+  width: 100vw;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

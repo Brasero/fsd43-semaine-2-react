@@ -1,4 +1,5 @@
 import React, {useReducer} from 'react'
+import './panier.scss'
 import {useLocation, useOutletContext} from "react-router-dom";
 
 import ItemList from '../ItemList'
@@ -73,18 +74,17 @@ const Panier = () => {
     }
 
     return (
-        <div>
-            <ItemList onAdd={handleAdd} />
-            <ul>
+        <div className={'panier_container'}>
+            <ul className={'panier_container_list'}>
                 {
                     panier.length > 0 ? (panier.map((elem, index) => {
-                        return <li key={index} onClick={() => handleRemove(elem)}> {elem.name} x {elem.quantite} </li>
+                        return <li className={'panier_container_item'} key={index} onClick={() => handleRemove(elem)}> {elem.name} x {elem.quantite} </li>
                     })) : (
                         <span> Aucun article dans le panier </span>
                     )
                 }
             </ul>
-            <div>
+            <div className={'total_item'}>
                 total d'article :
                     {
                         panier.length > 0 ? (
@@ -97,7 +97,7 @@ const Panier = () => {
                     }
             </div>
 
-            <div className='total'>
+            <div className='total_price'>
                 total :
                 {
                     panier.length > 0 ? (

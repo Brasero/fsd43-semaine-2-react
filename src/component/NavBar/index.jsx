@@ -1,4 +1,5 @@
 import {NavLink} from "react-router-dom";
+import './navBar.scss'
 
 const NavBar = () => {
 
@@ -11,8 +12,7 @@ const NavBar = () => {
 
     return (
         <nav>
-            <NavLink to={'/'} style={styleFn} state={{from: 'coucou'}}>Panier</NavLink>
-            <NavLink to={'/form'} style={styleFn}>Formulaire</NavLink>
+            <NavLink to={'/'} style={styleFn}>Acceuil</NavLink>
         </nav>
     )
 }

@@ -1,0 +1,10 @@
+.detail_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  flex: 4;
+  padding-top: 50px;
+  gap: 20px;
+}

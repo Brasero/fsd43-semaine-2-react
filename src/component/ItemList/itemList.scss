@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 25px;
+  flex: 4;
+  max-width: 66vw;
+
+  & .itemList .list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+
+    & .item {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+
+      & li {
+        color: antiquewhite;
+        font-weight: 700;
+        font-size: 14px;
+        font-family: "Arial Black", serif;
+      }
+    }
+  }
+}
+
