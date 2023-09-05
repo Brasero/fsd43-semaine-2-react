@@ -6,7 +6,7 @@ const NavBar = () => {
     const styleFn = ({isActive}) => {
         return {
             margin: '5px',
-            color: isActive && 'white'
+            color: isActive && 'white',
         }
     }
 
