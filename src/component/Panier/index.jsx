@@ -48,15 +48,6 @@ const panierReducer = (state, action) => {
 
 const Panier = () => {
 
-
-    const context = useOutletContext()
-
-    const routeState = useLocation()
-
-    console.log(routeState)
-
-    console.log(context)
-
     const [panier, dispatch] = useReducer(panierReducer, initialState)
 
     const handleAdd = (elem) => {

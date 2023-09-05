@@ -13,10 +13,31 @@ const ItemList = ({onAdd, elements}) => {
                 {
                     elements.map((element, index) => {
                         return (
-                            <div className={'item'}>
-                                <li key={index} onClick={() => onAdd(element)}>{element.name} - {element.price} €</li>
-                                <NavLink to={`/detail/${element.name}`} state={element}> > </NavLink>
-                            </div>
+                            <li key={index} className={'item'}>
+                                <div className={'img_wrapper'}>
+                                    <img src={'https://placehold.co/200?text=Image\\nHere'} />
+                                </div>
+                                <div className={'item_wrapper'}>
+                                    <div className={'item_title'}>{element.name}</div>
+                                    <div className={'item_price'}>{element.price} €</div>
+                                    <div className={'item_buttons'}>
+                                        <NavLink
+                                            className={'item_buttons_button'}
+                                            to={`/detail/${element.name}`}
+                                            state={element}
+                                        >
+                                            Voir plus >
+                                        </NavLink>
+                                        <button
+                                            className={'item_buttons_button'}
+                                            role={'button'}
+                                            onClick={() => onAdd(element)}
+                                        >
+                                            Ajouter au panier +
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
                         )
                     })
                 }
