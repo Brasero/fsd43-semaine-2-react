@@ -18,7 +18,7 @@ const Panier = () => {
     }
 
     return (
-        <div className={'panier_container'} >
+        <div className={`panier_container ${isOpen ? 'open':''}`} >
             {
                 isOpen ? (
                         <>

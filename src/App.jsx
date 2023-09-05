@@ -1,5 +1,4 @@
 import './app.scss'
-import './App.css'
 
 import {Navigate, Route, Routes} from "react-router-dom";
 import NavBar from "./component/NavBar/index.jsx";
