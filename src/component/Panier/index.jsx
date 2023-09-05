@@ -1,12 +1,18 @@
-import React, {useReducer, useState} from 'react'
+import React, { useState} from 'react'
 import './panier.scss'
-import {usePanier} from "../../utils/hook/usePanier.jsx";
+import {useSelector, useDispatch} from "react-redux";
+import {selectPanier} from "../../Store/Selectors/panierSelectors.js";
+import {removeAction} from "../../Store/Actions/panierActions.js";
 
 const Panier = () => {
-    const {panier, removeFromCart} = usePanier()
 
+    const dispatch = useDispatch()
+    const panier = useSelector(selectPanier)
     const [isOpen, setIsOpen] = useState(false)
 
+    const removeFromCart = (elem) => {
+        dispatch(removeAction(elem))
+    }
     const toggleIsOpen = () => {
         setIsOpen(!isOpen)
     }

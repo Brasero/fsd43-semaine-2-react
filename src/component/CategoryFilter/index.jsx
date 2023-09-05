@@ -1,5 +1,9 @@
+import {useSelector} from "react-redux";
+import {selectProducts} from "../../Store/Selectors/productSelectors.js";
 
-const CategoryFilter = ({elements, filter, handleChange}) => {
+const CategoryFilter = ({ filter, handleChange}) => {
+
+    const elements = useSelector(selectProducts)
 
     const categories = elements.reduce((acc, current) => {
         if (!acc.includes(current.category)) {

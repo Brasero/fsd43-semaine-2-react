@@ -1,14 +1,20 @@
 import {useParams, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import './productDetail.scss'
 import {usePanier} from "../../utils/hook/usePanier.jsx";
+import {useDispatch} from "react-redux";
+import {addAction} from "../../Store/Actions/panierActions.js";
 
 const ProductDetail = () => {
-    const {addToCart} = usePanier()
+    const dispatch = useDispatch()
     const {name} = useParams()
     const params = useSearchParams()
     console.log(params)
     const {state} = useLocation()
     const navigate = useNavigate()
+
+    const addToCart = (elem) => {
+        dispatch(addAction(elem))
+    }
 
     const goBack = () => {
         navigate(-1)

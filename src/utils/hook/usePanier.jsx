@@ -1,5 +1,5 @@
 import {useContext, createContext, useReducer} from "react";
-import panierReducer, {addAction, initialState, removeAction} from "../../Store/Reducer/panierReducer.jsx";
+import panierReducer, {initialState} from "../../Store/Reducer/panierReducer.jsx";
 
 const panierContext = createContext();
 
@@ -16,11 +16,9 @@ const useProvidePanier = () => {
     const [panier, dispatch] = useReducer(panierReducer, initialState)
 
     const addToCart = (elem) => {
-        dispatch(addAction(elem))
     }
 
     const removeFromCart = (elem) => {
-        dispatch(removeAction(elem))
     }
 
     return  {
