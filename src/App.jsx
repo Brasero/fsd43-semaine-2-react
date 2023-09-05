@@ -23,7 +23,7 @@ function App() {
                 <Route path={'page1'} element={<Panier />} />
                 <Route path={'page2'} element={<Form />} />
             </Route>
-            <Route path={'/detailProduct'} element={<DetailProduct />} />
+            <Route path={'/detailProduct'} element={<DetailProduct/>}/>
             <Route path={'*'} element={<NotFound />} />
         </Routes>
     </>
