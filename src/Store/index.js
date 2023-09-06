@@ -9,6 +9,7 @@ import messageReducer from "./Reducer/messageReducer.jsx";
 import {ADD_USER} from "./Actions/userActions.js";
 import {setMsgAction} from "./Actions/messageActions.js";
 import {ADD_HORSE} from "./Actions/horseActions.js";
+import logMiddleware from "./middleware/logMiddleware.js";
 
 const middleware = (store) => (next) => (action) => {
 
@@ -39,7 +40,7 @@ const store = createStore(combineReducers({
     message: messageReducer
 }),
     composeWithDevTools(
-        applyMiddleware(thunk, middleware)
+        applyMiddleware(thunk, logMiddleware)
     )
 )
 

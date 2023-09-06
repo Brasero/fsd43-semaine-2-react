@@ -1,7 +1,8 @@
-import {SET_MSG} from "../Actions/messageActions.js";
+import {ADD_LOG, RESET_LOG, SET_MSG} from "../Actions/messageActions.js";
 
 const initialState = {
-    message: ''
+    message: '',
+    logs: []
 }
 
 const messageReducer = (state = initialState, action) => {
@@ -10,6 +11,21 @@ const messageReducer = (state = initialState, action) => {
             return {
                 ...state,
                 message: action.payload
+            }
+
+        case ADD_LOG:
+            return {
+                ...state,
+                logs: [
+                    ...state.logs,
+                    action.payload
+                ]
+            }
+
+        case RESET_LOG:
+            return {
+                ...state,
+                logs: []
             }
 
 
