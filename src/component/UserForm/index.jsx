@@ -7,7 +7,9 @@ import validator from "../../utils/tools/validator.jsx";
 const UserForm = () => {
 
     const initialUser = {
-        name: ''
+        name: '',
+        age: '',
+        gender: ''
     }
 
     const initialError = {
@@ -24,6 +26,7 @@ const UserForm = () => {
 
     const handleChange = (e) => {
         const {value, name} = e.target
+        console.log(name)
         const error = validate(name, value)
 
         if (error) {
@@ -60,15 +63,34 @@ const UserForm = () => {
             {
                 Object.keys(config).map((key, index) => {
                      return (
-                         <div className={"inputGroup"}>
-                             <label>
-                                 {config[key].label} :
-                                 <input type={config[key].type} name={config[key].name} value={user[key]} onChange={handleChange} />
-                                 {
-                                     error[key] && <span style={{color: 'red'}}>{error[key]}</span>
-                                 }
-                             </label>
-                         </div>
+                             config[key].type === 'select' ? (
+                                 <label>
+                                     {config[key].label} :
+                                     <select name={config[key].name} value={user[config[key].name]} onChange={handleChange}>
+                                         <option value={''}>----</option>
+                                         {
+                                             Object.keys(config[key].options).map((optionKey, index) => {
+                                                 console.log(config[key].options[optionKey])
+                                                 const {value, label} = config[key].options[optionKey]
+                                                 return (
+                                                     <option key={`${optionKey}-${index}`} value={value}>{label}</option>
+                                                 )
+
+                                             })
+                                         }
+                                     </select>
+                                 </label>
+                             ) : (
+                                 <div className={"inputGroup"}>
+                                     <label>
+                                         {config[key].label} :
+                                         <input type={config[key].type} name={config[key].name} value={user[key]} onChange={handleChange} />
+                                         {
+                                             error[key] && <span style={{color: 'red'}}>{error[key]}</span>
+                                         }
+                                     </label>
+                                 </div>
+                             )
                      )
                 })
             }

@@ -2,20 +2,20 @@ import UserForm from "../../component/UserForm/index.jsx";
 import UserList from "../../component/UserList/index.jsx";
 import {useSelector} from "react-redux";
 import {numberOfUser, selectUserByName} from "../../Store/Selectors/userSelectors.js";
+import HorseForm from "../../component/HorseForm/index.jsx";
+import HorseList from "../../component/HorseList/index.jsx";
 
 const User = () => {
 
-    const nbUser = useSelector(numberOfUser)
-    const user = useSelector(selectUserByName('test'))
     return (
         <>
-            <UserForm />
-            <UserList />
             <div>
-                nombre d'utilisateur : {nbUser}
+                <UserForm />
+                <UserList />
             </div>
             <div>
-                utilisateur selectionné : {user.name}
+                <HorseForm />
+                <HorseList />
             </div>
         </>
     )
