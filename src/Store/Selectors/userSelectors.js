@@ -7,3 +7,5 @@ export const selectUserByName = (name) => {
         return state.user.users.filter((user) =>  user.name === name)[0] ?? {name: ''}
     }
 }
+
+export const selectCounter = (state) => state.user.counter;

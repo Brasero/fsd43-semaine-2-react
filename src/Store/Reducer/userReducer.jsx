@@ -1,7 +1,8 @@
-import {ADD_USER, RESET_USER} from "../Actions/userActions.js";
+import {ADD_USER, RESET_USER, SET_COUNT} from "../Actions/userActions.js";
 
 const initialState = {
-    users: []
+    users: [],
+    counter: 0
 }
 
 const userReducer = (state = initialState, action) => {
@@ -18,6 +19,12 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: initialState.users
+            }
+
+        case SET_COUNT:
+            return {
+                ...state,
+                counter: state.counter + action.payload
             }
 
         default:
