@@ -13,6 +13,7 @@ const NavBar = () => {
     return (
         <nav>
             <NavLink to={'/'} style={styleFn}>Acceuil</NavLink>
+            <NavLink to={'/user'} style={styleFn} >Utilisateurs</NavLink>
         </nav>
     )
 }
