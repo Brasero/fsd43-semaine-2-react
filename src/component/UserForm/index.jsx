@@ -7,8 +7,7 @@ import validator from "../../utils/tools/validator.jsx";
 const UserForm = () => {
 
     const initialUser = {
-        name: '',
-        surname: ''
+        name: ''
     }
 
     const initialError = {
